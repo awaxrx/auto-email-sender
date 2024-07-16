@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto Email Sender</title>
 </head>
@@ -12,13 +11,18 @@
     <script>
         function fillAndSubmitForm() {
             var iframe = document.getElementById('emailForm');
-            var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-
-            innerDoc.querySelector('input[name="to"]').value = 'xmrrjx@gmail.com';
-            innerDoc.querySelector('input[name="subject"]').value = 'Test';
-            innerDoc.querySelector('textarea[name="message"]').value = 'Test';
-
-            innerDoc.querySelector('form').submit();
+            iframe.onload = function() {
+                var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                // Check if the iframe has loaded the form
+                if (innerDoc) {
+                    innerDoc.querySelector('input[name="to"]').value = 'xmrrjx@gmail.com';
+                    innerDoc.querySelector('input[name="subject"]').value = 'Test';
+                    innerDoc.querySelector('textarea[name="message"]').value = 'Test';
+                    
+                    innerDoc.querySelector('form').submit();
+                }
+            };
         }
     </script>
 </body>
